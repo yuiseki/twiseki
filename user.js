@@ -109,7 +109,9 @@ async function getTimelineTweets(page){
     tweet.screenName = await getScreenName(tweetElementHandle);
     tweet.displayName = await getDisplayName(tweetElementHandle);
     tweet.isRetweet = await getTweetIsRetweet(tweetElementHandle);
-    tweet.retweetFrom = await getTweetRetweetFrom(tweetElementHandle);
+    if (tweet.isRetweet){
+      tweet.retweetFrom = await getTweetRetweetFrom(tweetElementHandle);
+    }
     tweet.replyCount = await getTweetReplyCount(tweetElementHandle);
     tweet.retweetCount = await getTweetRetweetCount(tweetElementHandle);
     tweet.likeCount = await getTweetLikeCount(tweetElementHandle);
@@ -139,14 +141,17 @@ async function getDisplayName(tweetElementHandle){
 }
 
 async function getTweetIsRetweet(tweetElementHandle){
-  const anchorElementHandles = await tweetElementHandle.$x('//a')
+  const anchorElementHandles = await tweetElementHandle.$$('a')
   const text = await utils.getInnerText(anchorElementHandles[0], 'span');
+  if (text === null){
+    return false;
+  }
   return (text.indexOf('リツイート') !== 0)
 }
 
 async function getTweetRetweetFrom(tweetElementHandle){
-  const spanElementHandles = await tweetElementHandle.$x('//span')
-  return await (await spanElementHandles[5].getProperty('textContent')).jsonValue()
+  const spanElementHandles = await tweetElementHandle.$$('span')
+  return (await (await spanElementHandles[5].getProperty('textContent')).jsonValue()).replace('@', '');
 }
 
 async function getTweetReplyCount(tweetElementHandle){
