@@ -1,0 +1,27 @@
+{
+  "name": "twitter-dl",
+  "version": "0.0.1",
+  "description": "download all twitter data by scraping without api token",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "twitter",
+    "scraping",
+    "scraper"
+  ],
+  "author": "yuiseki",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "puppeteer": "^5.2.1",
+    "puppeteer-core": "^5.2.1",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  },
+  "devDependencies": {
+    "jest": "^26.2.2"
+  }
+}
