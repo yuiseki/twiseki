@@ -1,4 +1,3 @@
-const utils = require('./utils');
 const puppeteer = require('puppeteer');
 
 
@@ -40,13 +39,13 @@ exports.getProfile = getProfile;
  */
 async function getTimeline(screenName){
   let result;
-  async function getTimeline(response){
+  async function getTimelineRes(response){
     try {
       if (response.url().indexOf("https://api.twitter.com/2/timeline/profile/") >= 0){
         const text = await response.text();
         const json = JSON.parse(text);
         result = json.globalObjects.tweets;
-        page.off('response', getTimeline);
+        page.off('response', getTimelineRes);
       }
     } catch (error) {
     }
@@ -54,7 +53,7 @@ async function getTimeline(screenName){
   const url = getUserPageUrl(screenName);
   browser = await puppeteer.launch();
   const [page] = await browser.pages();
-  page.on('response', getTimeline);
+  page.on('response', getTimelineRes);
   await page.goto(url, {waitUntil: 'networkidle2'});
   await browser.close();
   return result;
