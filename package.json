@@ -1,10 +1,10 @@
 {
-  "name": "twitter-dl",
-  "version": "0.0.1",
-  "description": "download all twitter data by scraping without api token",
+  "name": "twitter-puppeteer",
+  "version": "0.0.3",
+  "description": "download all twitter data by scraping without api token using puppeteer.",
   "main": "index.js",
   "bin": {
-    "twitter-dl": "index.js"
+    "twitter-puppeteer": "index.js"
   },
   "scripts": {
     "start": "node index.js",

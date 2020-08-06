@@ -1,15 +1,15 @@
-# twitter-dl
+# twitter-puppeteer
 
-## Setup
+## Install
 ```
-npm install
+npm install -g twitter-puppeteer
 ```
 
 ## Basic usage
 ```
-npm start --silent profile yuiseki
-npm start --silent timeline yuiseki
-npm start --silent search from:yuiseki
+twitter-puppeteer profile yuiseki
+twitter-puppeteer timeline yuiseki
+twitter-puppeteer search from:yuiseki
 ```
 
 ## Development
