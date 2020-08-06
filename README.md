@@ -9,8 +9,8 @@ npm install -g twitter-puppeteer
 ```
 twitter-puppeteer --help
 twitter-puppeteer profile yuiseki
-twitter-puppeteer timeline yuiseki
-twitter-puppeteer search from:yuiseki
+twitter-puppeteer timeline yuiseki | jq '.[].full_text'
+twitter-puppeteer search from:yuiseki | jq '.[].full_text'
 ```
 
 ## Development
@@ -18,4 +18,12 @@ twitter-puppeteer search from:yuiseki
 ### Run test
 ```
 jest
+```
+
+## Punishment of Windows Powershell
+If you want to use this command in Windows Powershell, you should do following commands before using this command!
+
+```
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF
+$OutputEncoding = [Console]::OutputEncodin
 ```
