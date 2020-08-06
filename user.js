@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const utils = require('./utils');
 
 
 function getUserPageUrl (username){
@@ -37,15 +38,14 @@ exports.getProfile = getProfile;
 /*
  * Fetch user timeline
  */
-async function getTimeline(screenName){
-  let result;
+async function getTimeline(screenName, scroll){
+  let result = {};
   async function getTimelineRes(response){
     try {
       if (response.url().indexOf("https://api.twitter.com/2/timeline/profile/") >= 0){
         const text = await response.text();
         const json = JSON.parse(text);
-        result = json.globalObjects.tweets;
-        page.off('response', getTimelineRes);
+        Object.assign(result, json.globalObjects.tweets);
       }
     } catch (error) {
     }
@@ -55,6 +55,7 @@ async function getTimeline(screenName){
   const [page] = await browser.pages();
   page.on('response', getTimelineRes);
   await page.goto(url, {waitUntil: 'networkidle2'});
+  await utils.autoScroll(page);
   await browser.close();
   return result;
 }

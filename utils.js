@@ -1,43 +1,8 @@
 const puppeteer = require('puppeteer');
 
-let browser;
-async function getPage(url, scroll){
-  try {
-    browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    // jsの読み込みを待つ
-    await page.goto(url, {waitUntil: 'networkidle0'});
-    // スクロールする
-    await autoScroll(page, scroll);
-    return page;
-  } catch(e) {
-    console.error(e);
-  }
-}
-exports.getPage = getPage;
-
-async function getPageXhr(url){
-  try {
-    browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    page.on(res, async (res) => {
-      if (res.url()){
-        json = await res.json();
-      }
-    });
-  } catch (e) {
-    
-  }
-}
-
-function closeBrowser(){
-  browser.close();
-}
-exports.closeBrowser = closeBrowser;
-
 // スクロールする便利なやつ
-async function autoScroll(page, maxCount){
-  await page.evaluate(async (maxCount) => {
+async function autoScroll(page){
+  await page.evaluate(async () => {
     await new Promise((resolve, reject) => {
       var totalHeight = 0;
       var distance = 100;
@@ -47,20 +12,15 @@ async function autoScroll(page, maxCount){
         window.scrollBy(0, distance);
         totalHeight += distance;
         count++;
-
-        if(count >= maxCount){
-            clearInterval(timer);
-            resolve();
-        }
         if(totalHeight >= scrollHeight){
             clearInterval(timer);
             resolve();
         }
       }, 100);
     });
-  }, maxCount);
+  });
 }
-
+exports.autoScroll = autoScroll;
 
 
 async function getInnerText(elementHandle, querySelector){

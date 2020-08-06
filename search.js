@@ -14,8 +14,7 @@ async function getSearchResult(query){
       if(response.url().indexOf('https://api.twitter.com/2/search/adaptive.json') >= 0){
         const text = await response.text();
         const json = JSON.parse(text);
-        result = json.globalObjects.tweets;
-        page.off('response', getSearchResultRes);
+        Object.assign(result, json.globalObjects.tweets);
       }
     } catch (error) {
     }
@@ -25,6 +24,7 @@ async function getSearchResult(query){
   const [page] = await browser.pages();
   page.on('response', getSearchResultRes);
   await page.goto(url, {waitUntil: 'networkidle2'});
+  await utils.autoScroll(page);
   await browser.close();
   return result;
 }
