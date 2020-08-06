@@ -14,7 +14,7 @@ yargs
     async (argv) => {
       const { username } = argv;
       const profile = await user.getProfile(username);
-      console.log(profile);
+      console.log(JSON.stringify(profile));
     }
   )
   .command(
@@ -24,7 +24,7 @@ yargs
     async (argv) => {
       const { username } = argv;
       const timeline = await user.getTimeline(username);
-      console.log(timeline);
+      console.log(JSON.stringify(timeline));
     }
   )
   .command(
@@ -34,6 +34,6 @@ yargs
     async (argv) => {
       const { query } = argv;
       const searchResult = await search.getSearchResult(query);
-      console.log(searchResult);
+      console.log(JSON.stringify(searchResult));
     }
   ).argv;
