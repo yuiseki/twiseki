@@ -24,6 +24,6 @@ jest
 If you want to use this command in Windows Powershell, you should do following commands before using this command!
 
 ```
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [Console]::OutputEncodin
 ```
