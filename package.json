@@ -22,7 +22,8 @@
     "puppeteer": "^5.2.1",
     "puppeteer-core": "^5.2.1",
     "request": "^2.88.2",
-    "request-promise": "^4.2.6"
+    "request-promise": "^4.2.6",
+    "yargs": "^15.4.1"
   },
   "devDependencies": {
     "jest": "^26.2.2"
