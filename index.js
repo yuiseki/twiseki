@@ -1,25 +1,39 @@
 #!/usr/bin/env node
+const yargs = require("yargs");
 
-const user = require('./user');
-const search = require('./search');
+const user = require("./user");
+const search = require("./search");
 
-!(async() => {
-  const command_type = process.argv[2];
-  const command_args = process.argv[3];
-  switch (command_type) {
-    case 'profile':
-      const profile = await user.getProfile(command_args);
+yargs
+  .scriptName("twitter-puppeteer")
+  .usage("$0 <cmd> [args]")
+  .command(
+    "profile [USER NAME]",
+    "Download Profile",
+    (yargs) => {},
+    async (argv) => {
+      const { username } = argv;
+      const profile = await user.getProfile(username);
       console.log(profile);
-      break
-    case 'timeline':
-      const timeline = await user.getTimeline(command_args);
+    }
+  )
+  .command(
+    "timeline [USER NAME]",
+    "Download Timeline",
+    (yargs) => {},
+    async (argv) => {
+      const { username } = argv;
+      const timeline = await user.getTimeline(username);
       console.log(timeline);
-      break;
-    case 'search':
-      const searchResult = await search.getSearchResult(command_args);
+    }
+  )
+  .command(
+    "search [QUERY]",
+    "Search Twitter",
+    (yargs) => {},
+    async (argv) => {
+      const { query } = argv;
+      const searchResult = await search.getSearchResult(query);
       console.log(searchResult);
-      break;
-    default:
-      break;
-  }
-})();
+    }
+  ).argv;
