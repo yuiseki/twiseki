@@ -3,9 +3,12 @@
   "version": "0.0.1",
   "description": "download all twitter data by scraping without api token",
   "main": "index.js",
+  "bin": {
+    "twitter-dl": "index.js"
+  },
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "twitter",

@@ -7,9 +7,9 @@ npm install
 
 ## Basic usage
 ```
-npm start profile yuiseki
-npm start timeline yuiseki
-npm start search from:yuiseki
+npm start --silent profile yuiseki
+npm start --silent timeline yuiseki
+npm start --silent search from:yuiseki
 ```
 
 ## Development

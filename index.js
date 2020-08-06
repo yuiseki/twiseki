@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 const user = require('./user');
 const search = require('./search');
