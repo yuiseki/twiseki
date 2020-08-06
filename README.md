@@ -7,7 +7,8 @@ npm install
 
 ## Basic usage
 ```
-npm start
+npm start timeline yuiseki
+npm start search from:yuiseki
 ```
 
 ## Development

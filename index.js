@@ -2,8 +2,8 @@
 const user = require('./user');
 const search = require('./search');
 
-!(async() => {
-  const tweets = await search.getSearchResult('from:yuiseki');
+async function searching(args){
+  const tweets = await search.getSearchResult(args);
   for (const id in tweets) {
     if (tweets.hasOwnProperty(id)) {
       const tweet = tweets[id];
@@ -11,9 +11,11 @@ const search = require('./search');
       console.log('\t'+tweet.full_text.replace(/\r?\n/g,' '));
     }
   }
-  /*
-  const profile = await user.getProfile('yuiseki');
-  const tweets = await user.getTimeline('yuiseki');
+}
+
+async function timeline(args){
+  const profile = await user.getProfile(args);
+  const tweets = await user.getTimeline(args);
   for (const id in tweets) {
     if (tweets.hasOwnProperty(id)) {
       const tweet = tweets[id];
@@ -23,5 +25,19 @@ const search = require('./search');
       }
     }
   }
-  */
+}
+
+!(async() => {
+  const command_type = process.argv[2];
+  const command_args = process.argv[3];
+  switch (command_type) {
+    case 'timeline':
+      await timeline(command_args);
+      break;
+    case 'search':
+      await searching(command_args);
+      break;
+    default:
+      break;
+  }
 })();
