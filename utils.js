@@ -16,6 +16,20 @@ async function getPage(url, scroll){
 }
 exports.getPage = getPage;
 
+async function getPageXhr(url){
+  try {
+    browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    page.on(res, async (res) => {
+      if (res.url()){
+        json = await res.json();
+      }
+    });
+  } catch (e) {
+    
+  }
+}
+
 function closeBrowser(){
   browser.close();
 }
