@@ -25,5 +25,5 @@ If you want to use this command in Windows Powershell, you should do following c
 
 ```
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-$OutputEncoding = [Console]::OutputEncodin
+$OutputEncoding = [Console]::OutputEncoding
 ```
